@@ -3,11 +3,46 @@ document.getElementById('new-today').addEventListener('click',function(){
 })
 
 document.getElementById('diffcolor').addEventListener('click',function(){
-    function getRandomColor(){
-        return '#' + Math.floor(Math.random()*16777215).toString(16);
+    function getRandomColor(number){
+       return Math.floor(Math.random()*(number+1));
     }
-    document.body.style.backgroundColor=getRandomColor()
+
+    const randomColor= `rgb(${getRandomColor(255)} ${getRandomColor(255)} ${getRandomColor(255)})`
+    document.body.style.backgroundColor=randomColor
 })
+
+// get time --------
+
+function time(){
+    let newdate=new Date();
+    let hours= newdate.getHours();
+    let minutes= newdate.getMinutes();
+    let seconds=newdate.getSeconds();
+
+    let amOrpm;
+    if (hours>=12){
+        amOrpm="PM"
+    }else{
+        amOrpm="AM"
+    }
+
+    if(hours> 12){
+        hours=hours-12
+    }if(hours===0){
+        hours=12
+    }
+
+    if(minutes<10){
+        minutes= "0"+minutes;
+    }
+    if(seconds<10){
+        seconds= "0"+seconds;
+    }
+
+    return hours +":"+minutes+":"+seconds+" "+amOrpm;
+}
+
+
 
 
 function date(){
@@ -29,7 +64,7 @@ for (let btn of btns){
         event.target.style.backgroundColor="gray"
         let getHeadingElement= event.target.parentNode.parentNode;
         let getHeading = getHeadingElement.querySelector('h1').innerHTML
-        console.log(getHeading)
+        
 
         let totalTaxt =document.getElementById('avleavleTaxt').innerHTML;
         let convertTotalTaxt=parseInt(totalTaxt)
@@ -42,14 +77,27 @@ for (let btn of btns){
         convertIncreseValue=convertIncreseValue+1;
         document.getElementById('increseValue').innerText=convertIncreseValue
 
+        let dataStore= document.getElementById('dataStore')
+        let p = document.createElement('p')
+        p.classList.add("dataitems")
+        p.innerHTML=`
+        You have Complete The Task ${getHeading} at ${time()}
+        `
+        dataStore.appendChild(p)
+       
+
         if(convertTotalTaxt===0){
             alert('Congrates!!! You have completed the current task')
         }
+        
             
     })
     
 }
 
-// let findValue =document.getElementById('avleavleTaxt').innerText
-// let converFindValue=parseInt(findValue)
-// console.log(converFindValue)
+
+
+
+
+
+
