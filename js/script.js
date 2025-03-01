@@ -59,6 +59,7 @@ document.getElementById('date').innerHTML=date();
 let btns =document.getElementsByClassName("card-btn");
 for (let btn of btns){
     btn.addEventListener('click',function(event){
+        
         alert("Board updated Successfully")
         event.target.setAttribute("disabled",true)
         event.target.style.backgroundColor="gray"
@@ -70,7 +71,6 @@ for (let btn of btns){
         let convertTotalTaxt=parseInt(totalTaxt)
         convertTotalTaxt= convertTotalTaxt - 1
         document.getElementById('avleavleTaxt').innerText=convertTotalTaxt;
-        console.log(convertTotalTaxt)
 
         let increseValue=document.getElementById('increseValue').innerHTML;
         let convertIncreseValue=parseInt(increseValue)
@@ -94,6 +94,17 @@ for (let btn of btns){
     })
     
 }
+
+// history remove------------------------
+
+document.getElementById('history-reset').addEventListener('click',function(){
+    let items=document.getElementsByClassName('dataitems');
+    while(items.length>0){
+       items[0].parentNode.removeChild(items[0])
+    }
+    
+})
+
 
 
 
